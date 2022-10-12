@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <!-- View层 -->
+    <div id="root">
+        <h1>姓名：{{name}}</h1>
+        <h1>年龄：{{age}}</h1>
+    </div>
+    <script>
+        // ViewModel层
+        const vm = new Vue({
+            el: '#root',
+            // Model层
+            data: {
+                name: "LWH",
+                age: 18
+            }
+        })
+    </script>
+</body>
+
+</html>

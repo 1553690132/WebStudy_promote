@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- <h2 v-show="true">欢迎来到 {{text}}</h2> -->
+
+        <h3>当前的n值为:{{n}}</h3>
+        <button @click="n++">n++</button>
+        <div v-if="n === 1">Angular</div>
+        <div v-else-if="n === 2">React</div>
+        <div v-else-if="n === 3">Vue</div>
+        <div v-else>HAHAHAH</div>
+
+        <template v-if="n===1">
+            <h1>12</h1>
+            <h2>23</h2>
+        </template>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                text: 'HNU',
+                n: 0
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .basic {
+            width: 200px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+
+        .happy {
+            border-color: red;
+            background-color: coral;
+        }
+
+        .sad {
+            border-color: turquoise;
+            background-color: skyblue;
+        }
+
+        .normal {
+            border-color: antiquewhite;
+            background-color: bisque;
+        }
+
+        .type1 {
+            border: 1px solid blue;
+        }
+
+        .type2 {
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        .type3 {
+            color: red;
+        }
+    </style>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 字符串写法:样式类名不确定,需要动态指定 -->
+        <div class="basic" :class="mood" @click="changeMood">{{name}}</div>
+        <br /> <br /><br />
+        <!-- 数组写法: 要绑定样式类名不确定,个数也不确定-->
+        <div class="basic" :class="classArr">{{name}}</div>
+        <br /> <br /><br />
+        <!-- 对象写法:样式类名确定,个数确定,但是要动态变化 -->
+        <div class="basic" :class="classObj">{{name}}</div>
+        <br /><br /><br />
+        <div class="basic" :style="styleObj">{{name}}</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                name: "LWH",
+                mood: 'normal',
+                classArr: ['type1', 'type2', 'type3'],
+                classObj: {
+                    type1: false,
+                    type2: false,
+                    type3: true
+                },
+                styleObj: {
+                    fontSize: '40px'
+                }
+            },
+            methods: {
+                changeMood() {
+                    const index = Math.floor(Math.random() * 3)
+                    const arr = ['normal', 'happy', 'sad']
+                    this.mood = arr[index]
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

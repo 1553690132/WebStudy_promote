@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin-bottom: 20px;
+        }
+
+        .f1 {
+            padding: 20px;
+            width: 100%;
+            height: 100px;
+            background-color: skyblue;
+        }
+
+        .f2 {
+            width: 100%;
+            height: 50px;
+            background-color: orange;
+        }
+    </style>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>Welcome To {{name}}</h2>
+        <!-- 阻止默认事件 -->
+        <a :href="url" @click.prevent="showInfo">点击提示信息</a>
+
+        <div class="f1" @click="showMeg('f1')">
+            <!-- 阻止冒泡 -->
+            <div class="f2" @click.stop="showMeg('f2')"></div>
+            <a :href="url" @click.prevent.stop="showInfo">点击提示信息</a>
+        </div>
+
+        <!-- 事件仅执行一次 -->
+        <button @click.once="showInfo">点击</button>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'China',
+                url: 'http://baidu.com'
+            },
+            methods: {
+                showInfo(event) {
+                    alert('Hello')
+                },
+
+                showMeg(m) {
+                    alert(m)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

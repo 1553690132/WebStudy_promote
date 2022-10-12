@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let age = 18
+
+        let person = {
+            name: 'lwh',
+            sex: 'man'
+        }
+
+        Object.defineProperty(person, 'age', {
+            // value: '18',
+            // writable: true,
+            // enumerable: true,
+            // configurable: true,
+
+            // 读取 age属性时，get函数(getter)被调用，返回值为age值
+            get: function () {
+                return age
+            },
+            // 修改 age属性时，set函数(setter)被调用，且会收到修改值
+            set(value){
+                console.log(value);
+                age = value
+            }
+        })
+
+        console.log(person);
+    </script>
+</body>
+
+</html>

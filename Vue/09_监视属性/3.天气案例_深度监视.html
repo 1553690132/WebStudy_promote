@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="changeWeather">切换天气</button>
+        <h3>a的值是{{numbers.a}}</h3>
+        <button @click="numbers.a++">点击a加1</button>
+        <h3>b的值是{{numbers.b}}</h3>
+        <button @click="numbers.b++">点击b加1</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                isHot: true,
+                numbers: {
+                    a: 1,
+                    b: 2,
+                }
+            },
+            methods: {
+                changeWeather() {
+                    this.isHot = !this.isHot
+                }
+            },
+            computed: {
+                info() {
+                    return this.isHot ? '炎热' : '凉爽'
+                }
+            },
+            watch: {
+                // 监视多级解构中某个属性的变化
+                'numbers.a': {
+                    handler() {
+
+                    }
+                },
+                // 监视多级结构中所有属性的变化
+                numbers: {
+                    deep:true,
+                    handler() {
+                        console.log('change');
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
