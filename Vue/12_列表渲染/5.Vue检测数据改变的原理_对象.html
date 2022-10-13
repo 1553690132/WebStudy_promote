@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <script>
+        let data = {
+            name: 'LWH',
+            age: 18
+        }
+
+        // 创建一个监听对象，监听data中的数据变化
+        const obs = new Observer(data)
+        let vm = {}
+        vm._data = data = obs
+
+        function Observer(obj) {
+            // 汇总对象中的所有属性形成一个数组
+            const keys = Object.keys(obj)
+            keys.forEach(k => {
+                Object.defineProperty(this, k, {
+                    get() {
+                        return obj[k]
+                    },
+                    set(value) {
+                        obj[k] = value
+                    }
+                })
+            })
+        }
+    </script>
+</body>
+
+</html>

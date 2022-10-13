@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>学生信息</h1>
+        <button @click="student.age++">年龄+1</button>
+        <button @click.once="addSex">添加性别属性,默认男</button>
+        <button v-if="student.sex" @click="student.sex = '未知'">修改性别</button>
+        <button @click.once="addFriend">添加一个朋友至首位</button>
+        <button @click.once="updateFirstFriendName">修改第一个朋友为张三</button>
+        <button @click="updateFirstHobby">修改第一个爱好为:开车</button>
+        <h2>学生姓名: {{student.name}}</h2>
+        <h3>学生年龄: {{student.age}}</h3>
+        <h3 v-if="student.sex">学生性别: {{student.sex}}</h3>
+        <h4>朋友们:</h4>
+        <ul>
+            <li v-for="(f, index) of student.friends" :keys="index">
+                {{f.name}}--{{f.age}}
+            </li>
+        </ul>
+        <h4>爱好:</h4>
+        <ul>
+            <li v-for="(h, index) of student.hobby" :keys="index">
+                {{h}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                name: '哈师大',
+                address: '哈尔滨',
+                student: {
+                    name: 'LWH',
+                    age: 18,
+                    friends: [
+                        { name: 'Jay', age: 20 },
+                        { name: 'Zed', age: 17 }
+                    ],
+                    hobby: ['打游戏', '抽烟', '烫头']
+                }
+            },
+            methods: {
+                addSex() {
+                    Vue.set(this.student, 'sex', '男')
+                },
+                addFriend() {
+                    this.student.friends.unshift({ name: 'jack', age: 91 })
+                },
+                updateFirstFriendName() {
+                    this.student.friends[0].name = '张三'
+                },
+                updateFirstHobby() {
+                    this.student.hobby.splice(0, 1, '开车')
+                    // 或者使用set方法
+                    Vue.set(this.student.hobby, 0, '开车')
+                    this.$set(this.student.hobby, 0, '开车')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
