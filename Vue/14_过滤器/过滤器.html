@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.11.5/dayjs.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>显示格式化后的时间:</h2>
+        <h3>现在是: {{time}}</h3>
+        <!-- 计算属性实现 -->
+        <h3>{{fmtTime}}</h3>
+        <!-- methods实现 -->
+        <h3>{{getFmtTime()}}</h3>
+        <!-- 过滤器实现 -->
+        <h3>{{time | timeFormat | myslice}}</h3>
+        <h3 :x="time | myslice"></h3>
+    </div>
+
+    <div id="root2">
+        <h2>Welcome {{msg | myslice}}</h2>
+    </div>
+
+    <script>
+        // 定义全局过滤器
+        Vue.filter('myslice', function (value) {
+            return value.slice(0, 3)
+        })
+
+
+        new Vue({
+            el: '#root',
+            data: {
+                time: new Date()
+            },
+            computed: {
+                fmtTime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            methods: {
+                getFmtTime() {
+                    return dayjs(this.time).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            // 局部过滤器
+            filters: {
+                timeFormat(value, str = "YYYY-MM-DD HH:mm:ss") {
+                    return dayjs(value).format(str)
+                },
+            }
+        })
+
+        new Vue({
+            el: '#root2',
+            data: {
+                msg: 'Hello'
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.1.2/axios.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <form @submit.prevent="submit">
+            <label for="username">账号：</label>
+            <input v-model.trim.number="userInfo.account" type="text" id="username">
+            <br />
+            <label for="pwd">密码：</label>
+            <input v-model.trim="userInfo.password" type="password" id="pwd">
+            <br />
+            性别：
+            男：<input v-model="userInfo.sex" type="radio" name="sex" value="man">
+            女：<input v-model="userInfo.sex" type="radio" name="sex" value="women">
+            <br />
+            爱好：
+            学习<input v-model="userInfo.hobby" type="checkbox" value="学习">
+            打游戏<input v-model="userInfo.hobby" type="checkbox" value="打游戏">
+            吃饭<input v-model="userInfo.hobby" type="checkbox" value="吃饭">
+            <br />
+            所属校区
+            <select v-model="userInfo.city">
+                <option value="">请选择校区</option>
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="tianjin">天津</option>
+            </select>
+            <br />
+            其他信息:
+            <textarea v-model.lazy="userInfo.others" name="" id="" cols="30" rows="10"></textarea>
+            <br />
+            <input v-model="userInfo.agree" type="checkbox">阅读并接受<a href="javascript:;">《用户协议》</a>
+            <button type="submit">提交</button>
+        </form>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                userInfo: {
+                    account: '',
+                    password: '',
+                    sex: 'man',
+                    hobby: [],
+                    city: 'beijing',
+                    others: '',
+                    agree: ''
+                }
+            },
+            methods: {
+                submit() {
+                    axios({
+                        method: 'post',
+                        url: 'http://localhost:3000/posts',
+                        data: this.userInfo
+                    }).then(response => console.log(response)
+                    ).catch(error => { throw new Error })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
