@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <!-- 实现fbind指令，绑定属性的同时使其默认获得焦点 -->
+    <div id="root">
+        1<input type="text" :value="n">
+        <hr />
+        2<input type="text" v-fbind:value="n">
+        <button @click="n++">n++</button>
+    </div>
+
+    <script>
+
+
+        new Vue({
+            el: '#root',
+            data: {
+                n: 10
+            },
+            // 对象式
+            directives: {
+                fbind: {
+                    // 指令与元素成功绑定时执行(初始化时)
+                    bind(element, binding) {
+                        element.value = binding.value
+                    },
+                    // 指令所在元素被插入页面时调用
+                    inserted(element) {
+                        element.focus()
+                    },
+                    // 指令所在模板被重新解析时
+                    update(element, binding) {
+                        element.value = binding.value
+                        element.focus()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
