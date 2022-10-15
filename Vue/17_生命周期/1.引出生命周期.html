@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2 :style="{opacity}">Hello</h2>
+        <!-- <span v-once>{{change()}}</span> -->
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                opacity: 1
+            },
+            mounted() {
+                setInterval(() => {
+                    this.opacity = this.opacity <= 0 ? 1 : this.opacity - 0.01
+                }, 16);
+            }
+            // methods: {
+            //     change() {
+            //         setInterval(() => {
+            //             this.opacity = this.opacity <= 0 ? 1 : this.opacity - 0.01
+            //         }, 16);
+            //     }
+            // }
+        })
+
+        // 通过外部定时器实现 不推荐！
+        // setInterval(() => {
+        //     vm.opacity = vm.opacity <= 0 ? 1 : vm.opacity - 0.01
+        // }, 16)
+    </script>
+</body>
+
+</html>

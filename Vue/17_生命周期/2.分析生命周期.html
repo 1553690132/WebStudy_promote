@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>当前n值为:{{n}}</h2>
+        <button @click="add">click</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                n: 1
+            },
+            methods: {
+                add() {
+                    this.n++
+                }
+            },
+            // 此时无法访问data和methods，数据代理、数据监测尚未开始
+            beforeCreate() {
+                console.log('beforeCreate');
+            },
+            // 已可以访问到data和methods
+            created() {
+                console.log('created');
+            },
+            // 此时页面为未经Vue编译的DOM，所有DOM操作均不奏效
+            beforeMount() {
+                console.log('beforeMount');
+            },
+            // 页面的DOM已经经过Vue编译。可进行一系列初始化操作
+            mounted() {
+                console.log('mounted');
+            },
+            // 此时数据为新的，但页面还是旧的
+            // 即页面和数据不同步
+            beforeUpdate() {
+                console.log('beforeUpdate');
+            },
+            // 数据与页面均新，即同步。
+            updated() {
+                console.log('updated');
+            },
+        })
+    </script>
+</body>
+
+</html>
