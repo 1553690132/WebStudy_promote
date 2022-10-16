@@ -13,6 +13,7 @@
     <div id="root">
         <h2>当前n值为:{{n}}</h2>
         <button @click="add">click</button>
+        <button @click="destroy">destroy</button>
     </div>
     <script>
         new Vue({
@@ -23,6 +24,9 @@
             methods: {
                 add() {
                     this.n++
+                },
+                destroy() {
+                    this.$destroy()
                 }
             },
             // 此时无法访问data和methods，数据代理、数据监测尚未开始
@@ -49,6 +53,13 @@
             // 数据与页面均新，即同步。
             updated() {
                 console.log('updated');
+            },
+            // 即将执行销毁过程，此时vm的data、methods等均可用
+            beforeDestroy() {
+                console.log('beforeDestroy');
+            },
+            destroyed() {
+                console.log('destroyed');
             },
         })
     </script>

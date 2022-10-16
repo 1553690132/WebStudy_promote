@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1 :style="{opacity}">{{name}}</h1>
+        <button @click="stop">停止变换</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                name: 'LWH',
+                opacity: 1
+            },
+            methods: {
+                stop() {
+                    this.$destroy()
+                }
+            },
+            mounted() {
+                this.timer = setInterval(() => {
+                    this.opacity = this.opacity <= 0 ? 1 : this.opacity - 0.01
+                }, 16);
+            },
+            beforeDestroy() {
+                clearInterval(this.timer)
+            },
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 编写组件标签 -->
+        <school></school>
+        <hr />
+        <student></student>
+    </div>
+
+    <div id="root2">
+        <hello></hello>
+    </div>
+
+    <script>
+        // 1.创建组件 2.注册组件 3.使用组件
+
+        // 创建school组件
+        const school = Vue.extend({
+            // 组件内不写el配置项，最终所有组件都会被vm管理决定服务于谁
+            template: `
+                <div>
+                    <h2>school name: {{schoolName}}</h2>
+                    <h2>school address: {{schoolAddress}}</h2>
+                </div>
+            `,
+            data() {
+                return {
+                    schoolName: 'HNU',
+                    schoolAddress: 'HRB'
+                }
+            },
+        })
+
+        // 创建student组件
+        const student = Vue.extend({
+            template: `
+            <div>
+                <h2>student name: {{studentName}} </h2>
+                <h2>student age: {{age}} </h2>
+                <button @click="go">btn</button>
+            </div>
+            `,
+            data() {
+                return {
+                    studentName: 'LWH',
+                    age: 18
+                }
+            },
+            methods: {
+                go() {
+                    alert(this.studentName)
+                }
+            },
+        })
+
+        // 创建vm
+        new Vue({
+            el: '#root',
+            // (局部)注册组件
+            components: {
+                school,
+                student
+            }
+        })
+
+
+        const hello = Vue.extend({
+            template: `<h1>Hello {{name}}</h1>`,
+            data() {
+                return {
+                    name: 'LWH'
+                }
+            }
+        })
+        // 全局注册
+        Vue.component('hello', hello)
+
+        new Vue({
+            el: '#root2',
+        })
+
+    </script>
+</body>
+
+</html>
