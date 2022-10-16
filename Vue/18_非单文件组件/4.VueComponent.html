@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <school></school>
+        <hello></hello>
+    </div>
+    <script>
+        const school = Vue.extend({
+            template: `<div>
+                <h2>{{name}}</h2>
+                <h2>{{address}}</h2>
+            </div>`,
+            data() {
+                return {
+                    name: 'HNU',
+                    address: 'HRB'
+                }
+            },
+        })
+
+        console.log(school);
+
+        const hello = {
+            template: `
+            <div>
+                <h1>Hello {{name}}</h1>
+                <button @click="show">btn</button>    
+            </div>`,
+            data() {
+                return {
+                    name: 'lwh'
+                }
+            },
+            methods: {
+                show() {
+                    // this为VueComponent实例对象
+                    console.log(this);    
+                }
+            },
+        }
+
+        const vm = new Vue({
+            el: '#root',
+            components: {
+                school,
+                hello
+            },
+        })
+    
+        console.log(vm);
+    </script>
+</body>
+
+</html>
