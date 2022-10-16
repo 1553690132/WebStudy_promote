@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,71 @@
     <title>Document</title>
     <script src="../vue.js"></script>
 </head>
+
 <body>
     <div id="root">
-        
     </div>
 
     <script>
+        const student = Vue.extend({
+            template: `<div>
+                <h2>{{name}}</h2>
+                <h2>{{age}}</h2>
+            </div>`,
+            data() {
+                return {
+                    name: 'LWH',
+                    age: 22
+                }
+            }
+        })
 
+        const school = Vue.extend({
+            template: `<div>
+                <h2>{{name}}</h2>
+                <h2>{{address}}</h2>
+                <student></student>
+            </div>`,
+            data() {
+                return {
+                    name: 'HNU',
+                    address: 'HRB'
+                }
+            },
+            components: {
+                student
+            }
+        })
+
+        const hello = Vue.extend({
+            template: `<h2>Hello {{name}}</h2>`,
+            data() {
+                return {
+                    name:'LWH'
+                }
+            }
+        })
+
+        // 管理所有组件的组件
+        const app = Vue.extend({
+            template: `<div>
+                    <school></school>
+                    <hello></hello>
+                </div>`,
+            components: {
+                school,
+                hello
+            }
+        })
+
+        new Vue({
+            el: '#root',
+            components: {
+                app
+            },
+            template:`<app></app>`
+        })
     </script>
 </body>
+
 </html>
