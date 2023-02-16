@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let person = {
+            name: 'lwh',
+            age: 18
+        }
+        // 模拟Vue2响应式
+        //#region
+        // let p = {}
+        // Object.keys(person).forEach(e => {
+        //     Object.defineProperty(p, e.toString(), {
+        //         configurable: true,
+        //         get() {
+        //             return e
+        //         },
+        //         set(value) {
+        //             console.log(`${e}发生修改`);
+        //             e = value
+        //         }
+        //     })
+        // })
+        //#endregion
+
+        // 模拟Vue3响应式（猜想）
+        //#region 
+        // const p = new Proxy(person, {
+        //     get(target, propName) {
+        //         console.log(`读取了${propName}属性`);
+        //         return target[propName]
+        //     },
+        //     // 修改属性或追加属性时调用
+        //     set(target, propName, value) {
+        //         console.log(`修改了${propName}属性`);
+        //         target[propName] = value
+        //     },
+        //     deleteProperty(target, propName) {
+        //         console.log(`删除了${propName}属性`);
+        //         return delete target[propName]
+        //     },
+        // })
+        //#endregion
+
+        // 模拟Vue3响应式（实际）
+        const p = new Proxy(person, {
+            get(target, prop) {
+                return Reflect.get(target, prop)
+            },
+            set(target, prop, value) {
+                return Reflect.set(target, prop, value)
+            },
+            deleteProperty(target, prop) {
+                return Reflect.deleteProperty(target, prop)
+            }
+        })
+    </script>
+</body>
+
+</html>
