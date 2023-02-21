@@ -66,8 +66,9 @@ class GameControl {
             this.snake.X = X;
             this.snake.Y = Y;
         } catch (error) {
-            alert('GAME OVER');
             this.isLive = false;
+            alert(`Game Over! Your score is ${this.scorePanel.score}`)
+            location.reload();
         }
         this.isLive && setTimeout(this.run.bind(this), this.speed - this.scorePanel.level * 30);
     }

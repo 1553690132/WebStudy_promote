@@ -28,7 +28,7 @@ class Snake {
 
     configLoacion(coordinate: number, distance: number, direction: string) {
         if (coordinate === distance) return;
-        if (coordinate < 0 || coordinate > 290) {
+        if (distance < 0 || distance > 290) {
             throw new Error('撞墙!');
         }
         if (direction === 'x') {
